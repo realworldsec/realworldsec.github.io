@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealWorldSec</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /> 
+<link rel="icon" href="https://avatars.githubusercontent.com/u/193912548?v=4" type="image/png">   
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1, p, h2 {
+            font-family: 'Ubuntu', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, #b21f2d, #e52f6d);
+            padding: 120px 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            animation: headerIn 1.5s ease-in-out;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; color: #ff5050; }
+            50% { opacity: 0; color: transparent; }
+            100% { opacity: 1; color: #ff5050; }
+        }
+
+        header p {
+            font-size: 1.3em;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Circular Logo */
+        .logo {
+            width: 150px;
+            height: 150px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 20px auto;
+            overflow: hidden;
+            animation: logoSpin 5s linear infinite;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Parallax Background Effect */
+        .parallax {
+            background-image: url('background.jpg'); /* Replace with a cool image */
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Badge Container */
+        .badge-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 50px;
+            padding: 50px 30px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .badge-container a {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .badge-container a:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 30px rgba(255, 80, 80, 0.8);
+            border-color: #ff5050;
+        }
+
+        .badge-container a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .badge-container a:hover::before {
+            opacity: 1;
+        }
+
+        /* Badge Images */
+        iframe, img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            max-height: 200px;
+        }
+
+        iframe:hover, img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 80, 80, 0.9);
+        }
+
+        /* About Me Section */
+        .about-me {
+            padding: 80px 30px;
+            background-color: #1c1c1c;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .about-me h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ff5050;
+            font-weight: 700;
+        }
+
+        .about-me p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 80px 30px;
+            background-color: #121212;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .skills h2 {
+            font-size: 3em;
+            color: #ff5050;
+            margin-bottom: 20px;
+        }
+
+        .skills ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skills li {
+            background-color: #222;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .skills li:hover {
+            transform: scale(1.1);
+            background-color: #b21f2d;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 30px;
+            background-color: #1c1c1c;
+            text-align: center;
+        }
+
+        .projects h2 {
+            font-size: 3em;
+            color: #ff5050;
+            margin-bottom: 40px;
+        }
+
+        .projects .project {
+            display: inline-block;
+            margin: 20px;
+            background: #222;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            height: 300px;
+            color: #fff;
+            text-align: center;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .projects .project:hover {
+            transform: scale(1.05);
+            background: #b21f2d;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #121212;
+            padding: 40px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            font-size: 1.2em;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer .socials a {
+            color: #fff;
+            margin: 0 15px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        footer .socials a:hover {
+            color: #ff5050;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            margin-top: 50px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #b21f2d, #e52f6d);
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid #fff;
+            background: transparent;
+            color: #fff;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #ff5050;
+        }
+
+        .contact-form button {
+            padding: 15px 30px;
+            border-radius: 10px;
+            border: none;
+            background: #ff5050;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: #e52f6d;
+        }
+
+
+ /* Particle Animation Styles */
+       .particle {
+            position: absolute;
+            border-radius: 60%;
+            background: rgba(0, 255, 255, 0.3);
+            animation: float 1s;
+        }
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00;
+            }
+            100% {
+                text-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 10;
+            transition: opacity 0.3s;
+        }
+        .social-buttons {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 15px; /* Space between buttons */
+        }
+        .social-button {
+            background-color: rgba(34, 34, 34, 0.8);
+            color: #00ff00;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .social-button:hover {
+            transform: scale(1.1); /* Scale on hover */
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+</style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <!-- Replace with your actual logo image -->
+            <img src="https://avatars.githubusercontent.com/u/193912548?v=4" alt="Logo">
+        </div>
+        <h1>Real World Sec (realworldsec)</h1>
+        <p>Hello I am Sinan Rana.</p>
+    </header>
+<h2> I took my name (myday) becuase it,s my day my friend... </h2>
+    <!-- Badge Container -->
+    <div class="badge-container">
+        <a href="https://tryhackme.com/r/p/myday">
+            <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3908318" style="border:none;"></iframe>
+        </a>
+        <a href="https://app.hackthebox.com/profile/1746677">
+            <img src="https://www.hackthebox.com/badge/image/1746677" alt="Hack The Box Badge">
+        </a>
+        <a href="https://echoctf.red/profile/8863141">
+            <img src="https://echoctf.red/profile/8863141/badge" alt="Echo CTF Badge">
+        </a>
+        <a href="https://cybertalents.com/members/myday/profile">
+            <img src="img.gif" alt="Cyber Talents Badge">
+        </a>
+    </div>
+
+    <!-- About Me Section -->
+    <div class="about-me">
+        <h2>About Me</h2>
+        <p>I am 17 years old learning cyber security. My dream is be a zeroday hacker. Currently I am learning coding.</p>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>Penetration Testing</li>
+            <li>Bug Bounty Hunting</li>
+            <li>Binary Exploitation</li>
+            <li>Reverse Enginerring</li>
+            <li>Web Exploitation</li>
+            <li>Coding: C, C++, Python, Rust.</li>
+        </ul>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>Project 1</h3>
+            <p>Not Yet, But Soon.</p>
+        </div>
+        <div class="project">
+            <h3>Project 2</h3>
+            <p>Not Yet, But Soon.</p>
+        </div>
+        <div class="project">
+            <h3>Project 3</h3>
+            <p>Not Yet, But Soon.</p>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="contact-form">
+        <h2>Contact Me</h2>
+<form action="https://formspree.io/f/meooywqox" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Footer Section -->
+<footer>
+     <div class="social-buttons">
+<button class="social-button" onclick="window.open('https://facebook.com/realworldsec', '_blank')">
+            <i class="fab fa-facebook"></i>
+<button class="social-button" onclick="window.open('https://instagram.com/realworldsec', '_blank')">
+            <i class="fab fa-instagram"></i>
+
+<button class="social-button" onclick="window.open('https://threads.net/@realworldsec', '_blank')">
+            <i class="fab fa-threads"></i>
+        </button>
+        </button>
+        </button>
+
+<button class="social-button" onclick="window.open('https://reddit.com/user/realworldsec', '_blank')">
+            <i class="fab fa-reddit"></i>
+        </button>
+        <button class="social-button" onclick="window.open('https://youtube.com/@realworldsec', '_blank')">
+            <i class="fab fa-youtube"></i>
+        </button>
+        <button class="social-button" onclick="window.open('https://github.com/realworldsec', '_blank')">
+            <i class="fab fa-github"></i>
+        </button>
+<button class="social-button" onclick="window.open('https://www.pinterest.com/realworldsec', '_blank')">
+            <i class="fab fa-pinterest"></i>
+        </button>
+<button class="social-button" onclick="window.open('https://discord.com/channels/1321512909754601585/1321512913487396888', '_blank')">
+            <i class="fab fa-discord"></i>
+        </button>
+<button class="social-button" onclick="window.open('https://x.com/realworldsec_', '_blank')">
+            <i class="fab fa-twitter"></i>
+
+    </div>
+</footer>
+</body>
+</html>
